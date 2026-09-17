@@ -1,0 +1,13 @@
+/* ETAP 20 — korekty hero i panelu działki */
+
+@media (min-width: 1025px) {
+  .hero__script {
+    top: auto !important;
+    bottom: clamp(165px, 20vh, 220px) !important;
+  }
+}
+
+.plot-detail-drawer__close {
+  left: 12px !important;
+  right: auto !important;
+}
