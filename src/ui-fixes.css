@@ -1,13 +1,283 @@
-/* ETAP 20 — korekty hero i panelu działki */
+/* ETAP 21 — uproszczony HERO + czytelniejsza karta działki */
+
+/* HERO: zostawiamy tylko markę, główny nagłówek i CTA. */
+.hero__lead,
+.hero__note {
+  display: none !important;
+}
 
 @media (min-width: 1025px) {
+  .hero__content {
+    padding-top: clamp(185px, 24vh, 250px) !important;
+  }
+
+  .hero h1 {
+    max-width: 610px !important;
+    margin-bottom: 27px !important;
+    font-size: clamp(46px, 3.25vw, 55px) !important;
+    line-height: 1.02 !important;
+  }
+
+  .hero__actions {
+    margin: 0 !important;
+  }
+
   .hero__script {
     top: auto !important;
     bottom: clamp(185px, 22vh, 240px) !important;
   }
 }
 
+@media (min-width: 721px) and (max-width: 1024px) {
+  .hero__content {
+    padding-top: 165px !important;
+  }
+
+  .hero h1 {
+    max-width: 570px !important;
+    margin-bottom: 25px !important;
+    font-size: 46px !important;
+  }
+
+  .hero__actions {
+    margin: 0 !important;
+  }
+
+  .hero__script {
+    top: auto !important;
+    bottom: 235px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero__content {
+    padding-top: 145px !important;
+  }
+
+  .hero h1 {
+    margin-bottom: 24px !important;
+    font-size: 39px !important;
+  }
+
+  .hero__actions {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Drawer działki: większy, spokojniejszy i czytelny. */
 .plot-detail-drawer__close {
-  left: 12px !important;
+  left: 14px !important;
   right: auto !important;
+  width: 42px !important;
+  height: 42px !important;
+}
+
+@media (min-width: 901px) {
+  .masterplan-stage--fit {
+    height: clamp(600px, 36vw, 690px) !important;
+  }
+
+  .plot-detail-drawer {
+    width: min(510px, 42vw) !important;
+    min-width: 430px !important;
+    left: 14px !important;
+    top: 14px !important;
+    bottom: 14px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__photo,
+  .plot-detail-drawer .plot-detail__photo img {
+    flex: 0 0 182px !important;
+    height: 182px !important;
+    min-height: 182px !important;
+    max-height: 182px !important;
+  }
+
+  .plot-detail-drawer .plot-status {
+    top: 15px !important;
+    right: 16px !important;
+    padding: 8px 13px !important;
+    font-size: 12px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__photo-count {
+    right: 16px !important;
+    bottom: 13px !important;
+    font-size: 10.5px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__body {
+    padding: 22px 25px 20px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__type {
+    margin-bottom: 5px !important;
+    font-size: 12px !important;
+    letter-spacing: .12em !important;
+  }
+
+  .plot-detail-drawer .plot-detail h3 {
+    margin-bottom: 17px !important;
+    font-size: 42px !important;
+    line-height: 1 !important;
+  }
+
+  .plot-detail-drawer .plot-metrics {
+    gap: 14px !important;
+    padding-bottom: 18px !important;
+  }
+
+  .plot-detail-drawer .plot-metric__icon {
+    width: 43px !important;
+    height: 43px !important;
+    min-width: 43px !important;
+  }
+
+  .plot-detail-drawer .plot-metric__icon svg {
+    width: 23px !important;
+    height: 23px !important;
+  }
+
+  .plot-detail-drawer .plot-metrics > div > span:last-child {
+    font-size: 12.5px !important;
+    line-height: 1.16 !important;
+  }
+
+  .plot-detail-drawer .plot-metrics strong {
+    margin-top: 5px !important;
+    font-size: 22px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__description {
+    margin: 14px 0 13px !important;
+    font-size: 14px !important;
+    line-height: 1.46 !important;
+  }
+
+  .plot-detail-drawer .plot-detail__media {
+    padding-top: 12px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__media h4 {
+    margin-bottom: 10px !important;
+    font-size: 15px !important;
+  }
+
+  .plot-detail-drawer .plot-media-grid {
+    gap: 11px 18px !important;
+  }
+
+  .plot-detail-drawer .plot-media {
+    gap: 9px !important;
+  }
+
+  .plot-detail-drawer .plot-media b {
+    font-size: 13px !important;
+  }
+
+  .plot-detail-drawer .plot-media small {
+    margin-top: 2px !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+  }
+
+  .plot-detail-drawer .plot-media__icon {
+    height: 24px !important;
+  }
+
+  .plot-detail-drawer .plot-media__icon svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__actions {
+    gap: 12px !important;
+    padding-top: 17px !important;
+  }
+
+  .plot-detail-drawer .plot-primary,
+  .plot-detail-drawer .plot-secondary {
+    height: 52px !important;
+    font-size: 14px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__fineprint {
+    margin-top: 10px !important;
+    font-size: 9.5px !important;
+    line-height: 1.35 !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .masterplan-stage--fit {
+    height: 520px !important;
+  }
+
+  .plot-detail-drawer {
+    width: min(92vw, 430px) !important;
+    min-width: 0 !important;
+  }
+
+  .plot-detail-drawer .plot-detail__photo,
+  .plot-detail-drawer .plot-detail__photo img {
+    flex-basis: 130px !important;
+    height: 130px !important;
+    min-height: 130px !important;
+    max-height: 130px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__body {
+    padding: 14px 16px 14px !important;
+  }
+
+  .plot-detail-drawer .plot-detail h3 {
+    margin-bottom: 10px !important;
+    font-size: 31px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__type {
+    font-size: 10px !important;
+  }
+
+  .plot-detail-drawer .plot-metrics > div > span:last-child {
+    font-size: 10px !important;
+  }
+
+  .plot-detail-drawer .plot-metrics strong {
+    font-size: 18px !important;
+  }
+
+  .plot-detail-drawer .plot-detail__media h4 {
+    font-size: 12px !important;
+  }
+
+  .plot-detail-drawer .plot-media b {
+    font-size: 10.5px !important;
+  }
+
+  .plot-detail-drawer .plot-media small {
+    font-size: 9px !important;
+  }
+
+  .plot-detail-drawer .plot-primary,
+  .plot-detail-drawer .plot-secondary {
+    height: 44px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .masterplan-stage--fit {
+    height: 470px !important;
+  }
+
+  .plot-detail-drawer {
+    width: min(94vw, 405px) !important;
+  }
+
+  .plot-detail-drawer__close {
+    left: 10px !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
 }
