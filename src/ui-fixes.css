@@ -3,7 +3,7 @@
 @media (min-width: 1025px) {
   .hero__script {
     top: auto !important;
-    bottom: clamp(165px, 20vh, 220px) !important;
+    bottom: clamp(185px, 22vh, 240px) !important;
   }
 }
 
