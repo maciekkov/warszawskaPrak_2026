@@ -35,6 +35,11 @@ const DESCRIPTIONS = {
   funkcjonalna:'Działka o praktycznych proporcjach i większej swobodzie zagospodarowania. Dobra baza pod indywidualny projekt domu.',
 };
 
+const formatGrossPerM2 = (plot) => {
+  if(!plot?.priceBrutto || !plot?.size) return '—';
+  return `${new Intl.NumberFormat('pl-PL', { minimumFractionDigits:0, maximumFractionDigits:2 }).format(plot.priceBrutto / plot.size)} zł`;
+};
+
 function statusClass(plot){
   if(plot.status === 'available') return 'available';
   if(plot.status === 'reserved') return 'reserved';
@@ -186,8 +191,8 @@ function PlotDetail({ plot, onAsk, onClose, open }){
           </>
         ) : (
           <>
-            <div><span className="plot-metric__icon"><CoinIcon/></span><span>Cena netto<strong>{formatPLN(plot.priceNetto)}</strong></span></div>
-            <div><span className="plot-metric__icon"><RulerIcon/></span><span>Cena za m²<strong>{plot.pricePerM2Netto ? `${plot.pricePerM2Netto} zł` : '—'}</strong></span></div>
+            <div><span className="plot-metric__icon"><CoinIcon/></span><span>Cena brutto<strong>{formatPLN(plot.priceBrutto)}</strong></span></div>
+            <div><span className="plot-metric__icon"><RulerIcon/></span><span>Cena brutto / m²<strong>{formatGrossPerM2(plot)}</strong></span></div>
           </>
         )}
       </div>
@@ -238,7 +243,7 @@ export default function PlotExplorer(){
   const toggleMapPlot = (id) => setSelectedId(current => current === id ? null : id);
 
   const askAboutPlot = (plot) => {
-    window.dispatchEvent(new CustomEvent('plot-inquiry', { detail:{ id:plot.id, area:plot.size, price:plot.priceNetto } }));
+    window.dispatchEvent(new CustomEvent('plot-inquiry', { detail:{ id:plot.id, area:plot.size } }));
     document.getElementById('kontakt')?.scrollIntoView({ behavior:'smooth', block:'start' });
   };
 
@@ -283,12 +288,12 @@ export default function PlotExplorer(){
         </div>
         <div className="plots-table-shell">
           <table className="plots-table">
-            <thead><tr><th>Nr działki</th><th>Powierzchnia</th><th>Cena netto</th><th>Cena / m²</th><th>Etap</th><th>Status</th><th>Media</th><th>Szczegóły</th></tr></thead>
+            <thead><tr><th>Nr działki</th><th>Powierzchnia</th><th>Cena brutto</th><th>Cena brutto / m²</th><th>Etap</th><th>Status</th><th>Media</th><th>Szczegóły</th></tr></thead>
             <tbody>{visibleRows.map(plot => <tr key={plot.id} className={plot.id === selectedPlot?.id ? 'is-selected' : ''} onClick={() => selectPlot(plot.id, true)}>
               <td><strong>{plot.id}</strong><small>{plot.typeLabel}</small></td>
               <td>{formatArea(plot.size)}</td>
-              <td>{formatPLN(plot.priceNetto)}</td>
-              <td>{plot.pricePerM2Netto ? `${plot.pricePerM2Netto} zł` : '—'}</td>
+              <td>{formatPLN(plot.priceBrutto)}</td>
+              <td>{formatGrossPerM2(plot)}</td>
               <td>{plot.etap}</td>
               <td><TableStatus plot={plot}/></td>
               <td><span className="table-media-icons" title="Prąd, woda, droga; kanalizacja wg działki"><span className="table-media-icon table-media-icon--bolt"><BoltIcon/></span><span className="table-media-icon table-media-icon--water"><DropletIcon/></span><span className="table-media-icon table-media-icon--road"><RoadIcon size={17}/></span>{plot.sewerage && <span className="table-media-icon table-media-icon--sewer"><SewerIcon/></span>}</span></td>
@@ -297,7 +302,7 @@ export default function PlotExplorer(){
           </table>
         </div>
         <div className="plots-table-more plots-table-more--static"><span>Etap II — już wkrótce</span></div>
-        <p className="plots-table-note">Podane ceny są cenami netto. Szczegóły podatkowe i aktualny status działki potwierdzamy przed zawarciem umowy.</p>
+        <p className="plots-table-note">Wszystkie ceny sprzedaży są cenami brutto. Cena za m² jest wyliczana z ceny całkowitej brutto. Aktualny status działki potwierdzamy przed zawarciem umowy.</p>
       </div>
     </div>
   </section>;
