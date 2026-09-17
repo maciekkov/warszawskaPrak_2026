@@ -1,0 +1,4 @@
+AUTOKLINIKA WWW v13.4.0
+Development: npm run dev
+Production build: npm run build -> dist/public + dist/private
+Backend production: PHP + private JSON storage, no SQL database

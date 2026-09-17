@@ -1,0 +1,19 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QA Masterplan fit</title>
+<style>
+html,body{margin:0;background:#f4f1e9;font-family:Arial,sans-serif}.wrap{width:1280px;margin:30px auto}.stage{position:relative;width:100%;aspect-ratio:2013/1019;overflow:hidden;border-radius:14px;border:1px solid rgba(19,53,39,.15);box-shadow:0 12px 34px rgba(28,51,39,.12)}
+.stage img,.stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}.stage img{object-fit:fill}.stage svg{z-index:2}.label{font-size:20px;font-weight:750;fill:#fff;paint-order:stroke;stroke:rgba(8,35,27,.74);stroke-width:3.4px;stroke-linejoin:round;pointer-events:none}.plot path{fill:rgba(45,150,76,.10);stroke:rgba(69,177,95,.20);stroke-width:.48;vector-effect:non-scaling-stroke}.plot.sel path{fill:rgba(38,210,88,.64);stroke:rgba(161,255,190,1);stroke-width:1.38}.compass{position:absolute;z-index:4;left:18px;top:18px;color:white;font-weight:700;text-shadow:0 1px 6px #000}.legend{position:absolute;z-index:4;left:18px;bottom:16px;background:rgba(251,249,241,.95);padding:10px 14px;border-radius:9px;color:#31443a;font-size:12px}
+</style></head><body><div class="wrap"><div class="stage"><img src="/assets/masterplan-map.jpg"><svg id="svg" viewBox="0 0 2013 1019" preserveAspectRatio="xMidYMid meet"></svg><div class="compass">N</div><div class="legend">Fit 1:1 — pełny plan bez pan</div></div></div>
+<script type="module">
+import {PLOTS} from './src/plotData.js';
+const svg=document.getElementById('svg');
+const NS='http://www.w3.org/2000/svg';
+for(const p of PLOTS){
+ const g=document.createElementNS(NS,'g');g.setAttribute('class','plot '+(p.id==='251/4'?'sel':''));
+ const path=document.createElementNS(NS,'path');path.setAttribute('d',p.d);g.appendChild(path);
+ if(p.klasa!=='DROGOWA'){
+  const t=document.createElementNS(NS,'text');t.setAttribute('x',p.cx);t.setAttribute('y',p.cy);t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');t.setAttribute('class','label');
+  if(p.rawId>=29&&p.rawId<=44)t.setAttribute('transform',`rotate(90 ${p.cx} ${p.cy})`);t.textContent=p.id;g.appendChild(t);
+ }
+ svg.appendChild(g);
+}
+</script></body></html>
